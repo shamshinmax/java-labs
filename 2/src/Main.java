@@ -1,6 +1,14 @@
 import java.util.Scanner;
 
+/**
+ *  запуск проверки ExpressionEvaluator
+ */
 public class Main {
+    /**
+     * считывает выражение из консоли и выводит результат 
+     *
+     * @param args аргументы командной строки
+     */
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         ExpressionEvaluator evaluator = new ExpressionEvaluator();

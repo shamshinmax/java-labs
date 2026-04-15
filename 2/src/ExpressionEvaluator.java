@@ -1,7 +1,17 @@
+/**
+ * вычисляет выражения со скобками и операциями +, -, *, /.
+ */
 public class ExpressionEvaluator {
     private String expression;
     private int pos;
 
+    /**
+     * вычисляет значение выражения
+     *
+     * @param expression выражение
+     * @return  результат
+     * @throws IllegalArgumentException если выражение некорректно
+     */
     public double evaluate(String expression) {
         if (expression == null || expression.isBlank()) {
             throw new IllegalArgumentException("Пустое выражение");
