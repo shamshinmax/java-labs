@@ -1,5 +1,7 @@
+package lab2;
+
 /**
- * вычисляет выражения со скобками и операциями +, -, *, /.
+ * вычисляет выражения со скобками и операциями
  */
 public class ExpressionEvaluator {
     private String expression;
@@ -8,8 +10,8 @@ public class ExpressionEvaluator {
     /**
      * вычисляет значение выражения
      *
-     * @param expression выражение
-     * @return  результат
+     * @param expression строка выражения
+     * @return вычисленный результат
      * @throws IllegalArgumentException если выражение некорректно
      */
     public double evaluate(String expression) {
@@ -30,9 +32,13 @@ public class ExpressionEvaluator {
         return result;
     }
 
+    /**
+     * разбирает выражение уровня сложения и вычитания
+     *
+     * @return значение выражения на текущем уровне приоритета
+     */
     private double parseExpression() {
         double value = parseTerm();
-
         while (true) {
             skipSpaces();
             if (match('+')) {
@@ -45,9 +51,13 @@ public class ExpressionEvaluator {
         }
     }
 
+    /**
+     * разбирает выражение уровня умножения и деления
+     *
+     * @return значение терма на текущем уровне приоритета
+     */
     private double parseTerm() {
         double value = parseFactor();
-
         while (true) {
             skipSpaces();
             if (match('*')) {
@@ -64,17 +74,19 @@ public class ExpressionEvaluator {
         }
     }
 
+    /**
+     * разбирает унарный знак, выражение в скобках или число
+     *
+     * @return значение фактора
+     */
     private double parseFactor() {
         skipSpaces();
-
         if (match('+')) {
             return parseFactor();
         }
-
         if (match('-')) {
             return -parseFactor();
         }
-
         if (match('(')) {
             double value = parseExpression();
             skipSpaces();
@@ -83,10 +95,15 @@ public class ExpressionEvaluator {
             }
             return value;
         }
-
         return parseNumber();
     }
 
+    /**
+     * считывает число с текущей позиции 
+     *
+     * @return считанное число
+     * @throws IllegalArgumentException если число записано некорректно
+     */
     private double parseNumber() {
         skipSpaces();
         int start = pos;
@@ -114,6 +131,12 @@ public class ExpressionEvaluator {
         return Double.parseDouble(expression.substring(start, pos));
     }
 
+    /**
+     * проверяет совпадает ли текущий символ с ожидаемым и сдвигает позицию
+     *
+     * @param expected ожидаемый символ
+     * @return true, если символ совпал
+     */
     private boolean match(char expected) {
         if (pos < expression.length() && expression.charAt(pos) == expected) {
             pos++;
@@ -122,6 +145,9 @@ public class ExpressionEvaluator {
         return false;
     }
 
+    /**
+     * пропускает все пробельные символы начиная с текущей позиции
+     */
     private void skipSpaces() {
         while (pos < expression.length() && Character.isWhitespace(expression.charAt(pos))) {
             pos++;
