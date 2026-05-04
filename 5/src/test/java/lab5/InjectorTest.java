@@ -16,8 +16,8 @@ class InjectorTest {
     @BeforeEach
     void setUp() throws IOException {
         try (FileWriter writer = new FileWriter("injector.properties")) {
-            writer.write("SomeInterface=SomeImpl\n");
-            writer.write("SomeOtherInterface=SODoer\n");
+            writer.write("lab5.SomeInterface=lab5.SomeImpl\n");
+            writer.write("lab5.SomeOtherInterface=lab5.SODoer\n");
         }
         injector = new Injector();
     }
@@ -32,8 +32,8 @@ class InjectorTest {
     @Test
     void shouldInjectDifferentImplementation() throws IOException {
         try (FileWriter writer = new FileWriter("injector.properties")) {
-            writer.write("SomeInterface=OtherImpl\n");
-            writer.write("SomeOtherInterface=SODoer\n");
+            writer.write("lab5.SomeInterface=lab5.OtherImpl\n");
+            writer.write("lab5.SomeOtherInterface=lab5.SODoer\n");
         }
         injector = new Injector();
 
@@ -44,7 +44,7 @@ class InjectorTest {
     @Test
     void shouldThrowExceptionWhenNoImplementationFound() throws IOException {
         try (FileWriter writer = new FileWriter("injector.properties")) {
-            writer.write("SomeOtherInterface=SODoer\n");
+            writer.write("lab5.SomeOtherInterface=lab5.SODoer\n");
         }
         injector = new Injector();
 
